@@ -26,14 +26,11 @@ const submitButton = registrationForm.querySelector(
 
 registrationForm.addEventListener("submit", async function (event) {
 
-    // Prevent page reload
     event.preventDefault();
 
-    // Clear previous message
     message.textContent = "";
     message.classList.remove("success");
 
-    // Get input values
     const nameValue = fullName.value.trim();
     const usernameValue = username.value.trim();
     const emailValue = email.value.trim();
@@ -47,21 +44,18 @@ registrationForm.addEventListener("submit", async function (event) {
     // 3. FRONTEND VALIDATION
     // ========================================
 
-    // Check Name
     if (nameValue.length < 3) {
         showMessage("Name must contain at least 3 characters.");
         fullName.focus();
         return;
     }
 
-    // Check Username
     if (usernameValue.length < 3) {
         showMessage("Username must contain at least 3 characters.");
         username.focus();
         return;
     }
 
-    // Check Email
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailPattern.test(emailValue)) {
@@ -70,7 +64,6 @@ registrationForm.addEventListener("submit", async function (event) {
         return;
     }
 
-    // Check Phone Number
     const phonePattern = /^[0-9]{10}$/;
 
     if (!phonePattern.test(phoneValue)) {
@@ -79,21 +72,18 @@ registrationForm.addEventListener("submit", async function (event) {
         return;
     }
 
-    // Check Password Length
     if (passwordValue.length < 8) {
         showMessage("Password must contain at least 8 characters.");
         password.focus();
         return;
     }
 
-    // Check Password Match
     if (passwordValue !== confirmPasswordValue) {
         showMessage("Passwords do not match!");
         confirmPassword.focus();
         return;
     }
 
-    // Check Gender
     const selectedGender = document.querySelector(
         'input[name="gender"]:checked'
     );
@@ -125,7 +115,6 @@ registrationForm.addEventListener("submit", async function (event) {
 
     try {
 
-        // Disable button while submitting
         if (submitButton) {
             submitButton.disabled = true;
             submitButton.textContent = "Registering...";
@@ -134,17 +123,16 @@ registrationForm.addEventListener("submit", async function (event) {
         showMessage("Please wait, registering your account...");
 
         const response = await fetch(
-    "https://saurabh-registration-backend.onrender.com/api/auth/register",
-    {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-    }
-);
+            "https://saurabh-registration-backend.onrender.com/api/auth/register",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userData)
+            }
+        );
 
-        // Convert response into JSON
         const result = await response.json();
 
 
@@ -163,13 +151,11 @@ registrationForm.addEventListener("submit", async function (event) {
             );
         }
 
-        // Registration successful
         message.textContent =
             result.message + " Welcome, " + nameValue + "!";
 
         message.classList.add("success");
 
-        // Reset form
         registrationForm.reset();
 
     }
@@ -190,7 +176,6 @@ registrationForm.addEventListener("submit", async function (event) {
 
     finally {
 
-        // Enable button again
         if (submitButton) {
             submitButton.disabled = false;
             submitButton.textContent = "Register";
@@ -208,7 +193,6 @@ registrationForm.addEventListener("submit", async function (event) {
 function showMessage(text) {
 
     message.textContent = text;
-
     message.classList.remove("success");
 
 }
