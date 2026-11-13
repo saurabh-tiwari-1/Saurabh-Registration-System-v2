@@ -134,7 +134,7 @@ registrationForm.addEventListener("submit", async function (event) {
         showMessage("Please wait, registering your account...");
 
         const response = await fetch(
-            "http://localhost:5000/api/auth/register",
+            "https://saurabh-registration-backend.onrender.com/api/auth/register",
             {
                 method: "POST",
 
