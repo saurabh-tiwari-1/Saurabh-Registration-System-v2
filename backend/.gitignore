@@ -1,2 +1,10 @@
+# Dependencies
 node_modules/
+
+# Environment variables
 .env
+backend/.env
+frontend/.env
+
+# Old nested repository
+Saurabh-Registration-System/

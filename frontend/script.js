@@ -134,17 +134,15 @@ registrationForm.addEventListener("submit", async function (event) {
         showMessage("Please wait, registering your account...");
 
         const response = await fetch(
-            "http://localhost:5000/api/auth/register",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify(userData)
-            }
-        );
+    "https://saurabh-registration-backend.onrender.com/api/auth/register",
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    }
+);
 
         // Convert response into JSON
         const result = await response.json();
